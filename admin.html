@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#f5f0e7">
+    <meta name="description" content="Administración del sitio Hostal La Estancia.">
+    <title>Administración | Hostal La Estancia</title>
+    <link rel="stylesheet" href="admin.css">
+    <script src="supabase-config.js"></script>
+    <script type="module" src="admin.js"></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">Saltar al contenido</a>
+    <header class="topbar">
+      <a class="brand" href="./index.html" aria-label="Hostal La Estancia, volver al sitio">
+        <span class="brand__mark" aria-hidden="true">E</span>
+        <span>Hostal <strong>La Estancia</strong></span>
+      </a>
+      <a class="back-link" href="./index.html">← Ver el sitio</a>
+    </header>
+
+    <main id="main-content">
+      <div id="global-status" class="status" role="status" aria-live="polite" hidden></div>
+
+      <section id="login-view" class="login-view" aria-labelledby="login-title" hidden>
+        <div class="login-card">
+          <p class="eyebrow">Área privada</p>
+          <h1 id="login-title">Qué bueno tenerte de vuelta.</h1>
+          <p class="intro-copy">Inicia sesión para actualizar el sitio de La Estancia.</p>
+          <form id="login-form" novalidate>
+            <label for="login-email">Correo electrónico</label>
+            <input id="login-email" name="email" type="email" autocomplete="username" required maxlength="254">
+            <label for="login-password">Contraseña</label>
+            <input id="login-password" name="password" type="password" autocomplete="current-password" required>
+            <button class="button button--primary button--wide" type="submit">Iniciar sesión</button>
+            <p id="login-status" class="form-status" role="status" aria-live="polite"></p>
+          </form>
+        </div>
+      </section>
+
+      <section id="invite-password-view" class="login-view" aria-labelledby="invite-password-title" hidden>
+        <div class="login-card">
+          <p class="eyebrow">Invitación a La Estancia</p>
+          <h1 id="invite-password-title">Crea tu contraseña.</h1>
+          <p class="intro-copy">Elige una contraseña nueva para completar tu acceso como responsable.</p>
+          <form id="invite-password-form" novalidate>
+            <label for="invite-new-password">Nueva contraseña</label>
+            <input id="invite-new-password" name="password" type="password" autocomplete="new-password" minlength="12" required aria-describedby="password-requirement">
+            <span id="password-requirement" class="field-hint">Debe tener al menos 12 caracteres.</span>
+            <label for="invite-confirm-password">Confirma la contraseña</label>
+            <input id="invite-confirm-password" name="confirmPassword" type="password" autocomplete="new-password" minlength="12" required>
+            <button class="button button--primary button--wide" type="submit">Guardar contraseña y continuar</button>
+            <p id="invite-password-status" class="form-status" role="status" aria-live="polite"></p>
+          </form>
+        </div>
+      </section>
+
+      <section id="dashboard" class="dashboard" aria-labelledby="dashboard-title" hidden>
+        <div class="dashboard-heading">
+          <div>
+            <p class="eyebrow">Panel de administración</p>
+            <h1 id="dashboard-title">Tu espacio, <em>tu historia.</em></h1>
+            <p id="account-label" class="account-label"></p>
+          </div>
+          <button id="logout-button" class="button button--outline" type="button">Cerrar sesión</button>
+        </div>
+
+        <nav class="tabs" aria-label="Secciones de administración" role="tablist">
+          <button id="tab-contact" class="tab is-active" type="button" role="tab" aria-selected="true" aria-controls="panel-contact" tabindex="0">Contacto</button>
+          <button id="tab-photos" class="tab" type="button" role="tab" aria-selected="false" aria-controls="panel-photos" tabindex="-1">Fotos</button>
+          <button id="tab-texts" class="tab" type="button" role="tab" aria-selected="false" aria-controls="panel-texts" tabindex="-1">Textos</button>
+          <button id="tab-users" class="tab admin-only" type="button" role="tab" aria-selected="false" aria-controls="panel-users" tabindex="-1" hidden>Usuarios</button>
+        </nav>
+
+        <section id="panel-contact" class="editor-panel" role="tabpanel" aria-labelledby="tab-contact">
+          <div class="panel-heading">
+            <div><p class="eyebrow">Información práctica</p><h2>Contacto</h2></div>
+            <p>Actualiza cómo pueden encontrarte tus huéspedes.</p>
+          </div>
+          <form id="contact-form" class="editor-form">
+            <div id="contact-fields" class="field-grid"></div>
+            <div class="form-footer">
+              <p class="form-status" data-status-for="contact" role="status" aria-live="polite"></p>
+              <button class="button button--primary" type="submit">Guardar contacto</button>
+            </div>
+          </form>
+        </section>
+
+        <section id="panel-photos" class="editor-panel" role="tabpanel" aria-labelledby="tab-photos" hidden>
+          <div class="panel-heading">
+            <div><p class="eyebrow">Imágenes del sitio</p><h2>Fotos</h2></div>
+            <p>JPG, PNG o WebP · máximo 5 MB por imagen.</p>
+          </div>
+          <form id="photos-form" class="editor-form">
+            <div id="photo-fields" class="photo-grid"></div>
+            <div class="form-footer">
+              <p class="form-status" data-status-for="photos" role="status" aria-live="polite"></p>
+              <button class="button button--primary" type="submit">Guardar fotos</button>
+            </div>
+          </form>
+        </section>
+
+        <section id="panel-texts" class="editor-panel" role="tabpanel" aria-labelledby="tab-texts" hidden>
+          <div class="panel-heading">
+            <div><p class="eyebrow">La voz de La Estancia</p><h2>Textos</h2></div>
+            <p>Los cambios se publican en el sitio al guardar.</p>
+          </div>
+          <form id="texts-form" class="editor-form">
+            <div id="text-fields" class="field-grid"></div>
+            <div class="form-footer">
+              <p class="form-status" data-status-for="texts" role="status" aria-live="polite"></p>
+              <button class="button button--primary" type="submit">Guardar textos</button>
+            </div>
+          </form>
+        </section>
+
+        <section id="panel-users" class="editor-panel" role="tabpanel" aria-labelledby="tab-users" hidden>
+          <div class="panel-heading">
+            <div><p class="eyebrow">Solo administradores</p><h2>Usuarios</h2></div>
+            <p>Invita responsables y consulta los perfiles existentes.</p>
+          </div>
+          <form id="invite-form" class="invite-form">
+            <div class="invite-input">
+              <label for="invite-email">Correo de la persona responsable</label>
+              <input id="invite-email" name="email" type="email" required maxlength="254" autocomplete="email">
+            </div>
+            <button class="button button--primary" type="submit">Invitar responsable</button>
+            <p id="invite-status" class="form-status" role="status" aria-live="polite"></p>
+          </form>
+          <div class="users-heading"><h3>Perfiles</h3><button id="refresh-users" class="text-button" type="button">Actualizar lista</button></div>
+          <p id="users-status" class="form-status" role="status" aria-live="polite"></p>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th scope="col">Correo</th><th scope="col">Rol</th><th scope="col">Creado</th></tr></thead>
+              <tbody id="users-list"></tbody>
+            </table>
+          </div>
+        </section>
+      </section>
+    </main>
+    <footer class="page-footer">Hostal La Estancia <span aria-hidden="true">·</span> La Habana, Cuba</footer>
+  </body>
+</html>

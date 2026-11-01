@@ -10,7 +10,8 @@
     >
     <title>Hostal La Estancia | Vive La Habana</title>
     <link rel="stylesheet" href="styles.css">
-    <script src="script.js" defer></script>
+    <script src="supabase-config.js"></script>
+    <script type="module" src="script.js"></script>
   </head>
   <body>
     <a class="skip-link" href="#contenido">Saltar al contenido</a>
@@ -39,11 +40,12 @@
     </header>
 
     <main id="contenido">
+      <p class="site-status section-wrap" data-site-status role="status" aria-live="polite" hidden></p>
       <section class="hero section-wrap" id="inicio" aria-labelledby="hero-title">
         <div class="hero__copy">
           <p class="eyebrow"><span class="eyebrow__line"></span> La Habana, Cuba</p>
-          <h1 id="hero-title">La ciudad se vive <em>mejor</em> desde casa.</h1>
-          <p class="hero__intro">
+          <h1 id="hero-title" data-content="hero_title">La ciudad se vive mejor desde casa.</h1>
+          <p class="hero__intro" data-content="hero_intro">
             Un lugar para hacer una pausa, sentir el ritmo de La Habana y descubrir
             sus historias con una mirada local.
           </p>
@@ -51,9 +53,10 @@
             <a class="button button--dark" href="#estancia">Conoce el hostal <span aria-hidden="true">↓</span></a>
             <a class="text-link" href="#experiencias">Explorar experiencias <span aria-hidden="true">↗</span></a>
           </div>
-          <p class="hero__note">Tu punto de partida para conocer la ciudad.</p>
+          <p class="hero__note" data-content="hero_note">Tu punto de partida para conocer la ciudad.</p>
         </div>
         <div class="hero-art" role="img" aria-label="Ilustración de una calle habanera con balcones y palmeras">
+          <img class="hero-art__photo" data-site-image="hero_image_url" alt="Vista de La Habana desde Hostal La Estancia" hidden>
           <div class="hero-art__sun"></div>
           <div class="hero-art__building hero-art__building--back">
             <span class="hero-art__window"></span>
@@ -79,14 +82,14 @@
       <section class="intro section-wrap" id="estancia" aria-labelledby="intro-title">
         <div class="section-kicker"><span>01</span> Un lugar con alma</div>
         <div class="intro__content">
-          <h2 id="intro-title">Qué bueno que <em>llegaste.</em></h2>
+          <h2 id="intro-title" data-content="intro_title">Qué bueno que llegaste.</h2>
           <div class="intro__text">
-            <p>
+            <p data-content="intro_paragraph_1">
               Hostal La Estancia es una invitación a conocer La Habana sin apuros:
               disfrutar de un espacio acogedor y encontrar nuevas formas de conectar
               con la ciudad.
             </p>
-            <p>
+            <p data-content="intro_paragraph_2">
               Ya sea tu primera visita o una vuelta esperada, aquí empieza una
               experiencia hecha a tu ritmo.
             </p>
@@ -99,13 +102,28 @@
         </div>
       </section>
 
+      <section class="gallery section-wrap" id="fotos" aria-labelledby="gallery-title" hidden>
+        <div class="section-kicker"><span>+</span> Un vistazo</div>
+        <h2 id="gallery-title">Postales de <em>La Estancia.</em></h2>
+        <div class="gallery__grid">
+          <figure class="gallery__item" data-gallery-item hidden>
+            <img data-site-image="room_image_url" alt="Habitación del Hostal La Estancia">
+            <figcaption>Un lugar para descansar</figcaption>
+          </figure>
+          <figure class="gallery__item" data-gallery-item hidden>
+            <img data-site-image="experience_image_url" alt="Experiencia local en La Habana">
+            <figcaption>La ciudad a tu manera</figcaption>
+          </figure>
+        </div>
+      </section>
+
       <section class="experiences" id="experiencias" aria-labelledby="experiences-title">
         <div class="section-wrap">
           <div class="section-kicker section-kicker--light"><span>02</span> Más allá de la estancia</div>
           <div class="experiences__heading">
             <div>
-              <h2 id="experiences-title">La Habana, <em>a tu ritmo.</em></h2>
-              <p>Hay muchas formas de conocerla. Elige por dónde empezar.</p>
+              <h2 id="experiences-title" data-content="experience_title">La Habana, a tu ritmo.</h2>
+              <p data-content="experience_intro">Hay muchas formas de conocerla. Elige por dónde empezar.</p>
             </div>
             <span class="experiences__stamp" aria-hidden="true">HA<br>BA<br>NA</span>
           </div>
@@ -113,22 +131,22 @@
             <article class="experience-card experience-card--guide">
               <span class="experience-card__number">01 / GUÍA LOCAL</span>
               <div class="experience-card__icon" aria-hidden="true">⌖</div>
-              <h3>Historias en cada esquina</h3>
-              <p>Recorre la ciudad con una guía local y descubre sus rincones, su historia y su vida cotidiana.</p>
+              <h3 data-content="guide_title">Historias en cada esquina</h3>
+              <p data-content="guide_description">Recorre la ciudad con una guía local y descubre sus rincones, su historia y su vida cotidiana.</p>
               <a href="#contacto" class="experience-card__link">Conversemos sobre tu recorrido <span aria-hidden="true">↗</span></a>
             </article>
             <article class="experience-card experience-card--city">
               <span class="experience-card__number">02 / VIDA HABANERA</span>
               <div class="experience-card__icon" aria-hidden="true">✳</div>
-              <h3>La ciudad como un local</h3>
-              <p>¿Buscas recomendaciones para tu visita? Te ayudamos a encontrar tu propio ritmo en La Habana.</p>
+              <h3 data-content="local_title">La ciudad como un local</h3>
+              <p data-content="local_description">¿Buscas recomendaciones para tu visita? Te ayudamos a encontrar tu propio ritmo en La Habana.</p>
               <a href="#contacto" class="experience-card__link">Cuéntanos qué te interesa <span aria-hidden="true">↗</span></a>
             </article>
             <article class="experience-card experience-card--stay">
               <span class="experience-card__number">03 / TU ESTANCIA</span>
               <div class="experience-card__icon" aria-hidden="true">⌂</div>
-              <h3>Un lugar donde volver</h3>
-              <p>Haz de La Estancia tu punto de partida para descansar y planear cada día a tu manera.</p>
+              <h3 data-content="stay_title">Un lugar donde volver</h3>
+              <p data-content="stay_description">Haz de La Estancia tu punto de partida para descansar y planear cada día a tu manera.</p>
               <a href="#contacto" class="experience-card__link">Consulta sobre tu estancia <span aria-hidden="true">↗</span></a>
             </article>
           </div>
@@ -140,15 +158,16 @@
         <div class="section-kicker"><span>03</span> El próximo paso</div>
         <div class="contact__content">
           <div>
-            <h2 id="contact-title">¿Ya te imaginas <em>por aquí?</em></h2>
-            <p>
+            <h2 id="contact-title" data-content="contact_title">¿Ya te imaginas por aquí?</h2>
+            <p data-content="contact_intro">
               Cuéntanos qué tienes en mente: una estancia, un recorrido o simplemente
               ganas de conocer La Habana.
             </p>
           </div>
           <div class="contact__action">
-            <p>Añade aquí el correo, teléfono o enlace de WhatsApp que usarás para atender consultas y reservas.</p>
-            <a class="button button--light" href="#experiencias">Descubrir experiencias <span aria-hidden="true">↗</span></a>
+            <p data-contact-placeholder>Escríbenos para consultar sobre tu estancia o planificar una experiencia en La Habana.</p>
+            <div class="contact__links" data-contact-links hidden></div>
+            <p class="contact__address" data-content="address"></p>
           </div>
         </div>
       </section>
@@ -161,7 +180,8 @@
       </a>
       <p>Un rincón para sentir La Habana.</p>
       <a class="footer-top" href="#inicio">Volver arriba ↑</a>
-      <span class="footer-copy">La Habana, Cuba</span>
+      <span class="footer-copy" data-content="address">La Habana, Cuba</span>
+      <a class="footer-admin" href="admin.html">Acceso administración</a>
     </footer>
   </body>
 </html>
