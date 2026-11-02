@@ -524,6 +524,24 @@ h2 em {
   font-size: 0.75rem;
 }
 
+.gallery__albums {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem 1.4rem;
+  margin-top: 1.25rem;
+}
+
+.gallery__albums a {
+  color: var(--muted);
+  font-size: 0.72rem;
+  text-decoration: none;
+  transition: color 160ms ease;
+}
+
+.gallery__albums a:hover {
+  color: var(--orange);
+}
+
 .site-status:not([hidden]) {
   margin-block: 1rem;
   padding: 0.85rem 1rem;
