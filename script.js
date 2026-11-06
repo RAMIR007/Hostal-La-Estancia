@@ -53,30 +53,28 @@ async function loadSiteContent() {
     document.querySelectorAll("[data-site-image]").forEach((image) => {
       const field = image.dataset.siteImage;
       const url = field && data[field];
-      if (typeof url !== "string" || !url) {
-        image.hidden = true;
-        return;
-      }
+      const fallbackUrl = image.getAttribute("src");
+      const fallbackAbsoluteUrl = fallbackUrl ? new URL(fallbackUrl, document.baseURI).href : "";
 
       image.addEventListener("load", () => {
         image.hidden = false;
         if (field === "hero_image_url") {
           image.closest(".hero-art")?.classList.add("has-photo");
-          image.closest(".hero-art")?.setAttribute("aria-label", "Fotografía de Hostal La Estancia en La Habana");
+          image.closest(".hero-art")?.setAttribute("aria-label", "Fotografía de un espacio de Hostal La Estancia en La Habana");
         } else {
           image.closest("[data-gallery-item]")?.removeAttribute("hidden");
           document.querySelector("#fotos")?.removeAttribute("hidden");
         }
-      }, { once: true });
+      });
       image.addEventListener("error", () => {
+        if (fallbackUrl && image.src !== fallbackAbsoluteUrl) {
+          image.src = fallbackUrl;
+          return;
+        }
         image.hidden = true;
-      }, { once: true });
-      image.src = url;
-    });
-    document.querySelectorAll("[data-gallery-item]").forEach((item) => {
-      const image = item.querySelector("img");
-      if (!image?.getAttribute("src")) {
-        item.hidden = true;
+      });
+      if (typeof url === "string" && url.trim()) {
+        image.src = url.trim();
       }
     });
 

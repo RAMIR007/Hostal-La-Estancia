@@ -2,6 +2,8 @@
 
 Sitio público y panel de administración para editar textos, datos de contacto y fotos. El contenido y los usuarios se guardan en Supabase.
 
+La galería pública muestra portadas de los álbumes de Flickr de áreas comunes y habitaciones, con enlaces a cada álbum. Las fotos del sitio almacenadas en Supabase sustituyen las imágenes de respaldo de áreas comunes y habitación cuando están disponibles.
+
 ## Configuración inicial de Supabase
 
 1. Crea un proyecto en Supabase y conserva su URL y la clave **anon/public**. En `supabase-config.js`, completa:
